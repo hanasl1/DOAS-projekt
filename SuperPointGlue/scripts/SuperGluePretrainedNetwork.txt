@@ -1,0 +1,2 @@
+Koristen model MagicLeap-a dozvoljen je za uporabu za akademske svrhe i non-profit organizacije
+https://github.com/magicleap/SuperGluePretrainedNetwork
