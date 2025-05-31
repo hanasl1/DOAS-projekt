@@ -1,0 +1,4 @@
+Vrijeme izvodenja (sekundi): 7.2097
+Broj tocaka objekta: 575
+Broj tocaka scene: 2253
+Broj pronadenih podudaranja: 435
