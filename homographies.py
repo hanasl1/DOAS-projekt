@@ -1,11 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-""" Find the projective transformation matrix (homography) between from a source image to a target image.
 
-Author: Hana Šlipogor
-MatrNr: 12404682
-"""
 
 import numpy as np
 from helper_functions import *
@@ -15,33 +11,7 @@ def find_homography_ransac(source_points: np.ndarray,
                            target_points: np.ndarray,
                            confidence: float,
                            inlier_threshold: float) -> Tuple[np.ndarray, np.ndarray, int]:
-    """Return estimated transforamtion matrix of source_points in the target image given matching points
 
-    Return the projective transformation matrix for homogeneous coordinates. It uses the RANSAC algorithm with the
-    Least-Squares algorithm to minimize the back-projection error and be robust against outliers.
-    Requires at least 4 matching points.
-
-    :param source_points: Array of points. Each row holds one point from the source (object) image [x, y]
-    :type source_points: np.ndarray with shape (n, 2)
-
-    :param target_points: Array of points. Each row holds one point from the target (scene) image [x, y].
-    :type target_points: np.ndarray with shape (n, 2)
-
-    :param confidence: Solution Confidence (in percent): Likelihood of all sampled points being inliers.
-    :type confidence: float
-
-    :param inlier_threshold: Max. Euclidean distance of a point from the transformed point to be considered an inlier
-    :type inlier_threshold: float
-
-    :return: (homography, inliers, num_iterations)
-        homography: The projective transformation matrix for homogeneous coordinates with shape (3, 3)
-        inliers: Is True if the point at the index is an inlier. Boolean array with shape (n,)
-        num_iterations: The number of iterations that were needed for the sample consensus
-    :rtype: Tuple[np.ndarray, np.ndarray, int]
-    """
-    ######################################################
-    # Write your own code here
-    #some inspiration from: https://github.com/dastratakos/Homography-Estimation/blob/main/imageAnalysis.py and https://github.com/hughesj919/HomographyEstimation/blob/master/Homography.py
 
     best_suggested_homography = np.eye(3)
     best_inliers = np.full(shape=len(target_points), fill_value=True, dtype=bool)
@@ -82,22 +52,7 @@ def find_homography_ransac(source_points: np.ndarray,
 
 
 def find_homography_leastsquares(source_points: np.ndarray, target_points: np.ndarray) -> np.ndarray:
-    """Return projective transformation matrix of source_points in the target image given matching points
 
-    Return the projective transformation matrix for homogeneous coordinates. It uses the Least-Squares algorithm to
-    minimize the back-projection error with all points provided. Requires at least 4 matching points.
-
-    :param source_points: Array of points. Each row holds one point from the source image (object image) as [x, y]
-    :type source_points: np.ndarray with shape (n, 2)
-
-    :param target_points: Array of points. Each row holds one point from the target image (scene image) as [x, y].
-    :type target_points: np.ndarray with shape (n, 2)
-
-    :return: The projective transformation matrix for homogeneous coordinates with shape (3, 3)
-    :rtype: np.ndarray with shape (3, 3)
-    """
-    ######################################################
-    # Write your own code here
     homography = np.eye(3)
     m1 = np.zeros((2 * len(source_points), 8), dtype=np.float32)
     m2 = np.zeros((2 * len(source_points), 1), dtype=np.float32)
